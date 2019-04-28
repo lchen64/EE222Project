@@ -6,13 +6,14 @@ A = np.random.randn(100, 500)
 b = np.random.randn(100, 1) * 25
 x0 = np.random.randn(500, 1)
 lamb = 4
-r = 5
+r = 4
 
 ATA = np.dot(A.T, A)
+eigs, _ = np.linalg.eig(ATA)
+eig_1 = np.max(eigs)
+L = eig_1 + 2 * lamb
 
-
-# 1/L
-s = 0.001
+s = 1.0 / L
 
 def f(x):
     return 0.5 * pow(np.linalg.norm(np.dot(A,x) - b), 2) + lamb * np.linalg.norm(x,ord=1)
