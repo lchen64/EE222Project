@@ -12,7 +12,7 @@ ATA = np.dot(A.T, A)
 
 
 # 1/L
-s = 0.1
+s = 0.001
 
 def f(x):
     return 0.5 * pow(np.linalg.norm(np.dot(A,x) - b), 2) + lamb * np.linalg.norm(x,ord=1)
@@ -24,7 +24,7 @@ def df(x):
     tmp[x>0] = 1.0
     tmp = tmp * lamb
 
-    return tmp
+    return grad + tmp
 
 if __name__ == "__main__":
 
