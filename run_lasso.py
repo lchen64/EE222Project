@@ -5,9 +5,9 @@ import cvxpy as cp
 
 # A = np.random.randn(500, 500)
 # b = np.random.randn(500, 1) * 3
-N = 20
+N = 500
 A = np.random.randn(N, N)
-b = np.random.randn(N, 1) * 0.3
+b = np.random.randn(N, 1) * 0.0003
 # x0 = np.ones((500, 1)) * 2
 # x0 = np.random.randn(500, 1) * 2
 x0 = np.random.uniform(low=-0.5, high=0.5, size=b.shape)
@@ -21,7 +21,7 @@ L = eig_1 + lamb
 
 # s = 1.0 / L
 print(eig_1)
-s = 0.00002
+s = 0.000002
 print(s)
 
 def f(x):
@@ -68,6 +68,7 @@ if __name__ == "__main__":
     plt.yscale('log',basey=10) 
     plt.plot(t, fs, linewidth=1)
     plt.xlabel("iteration number")
-    plt.ylabel("function value")
+    plt.ylabel("f - f*")
     plt.title("Nesterov's Lasso")
+    plt.savefig("plots/Lasso_N_{}.png".format(N))
     plt.show()

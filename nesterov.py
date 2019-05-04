@@ -21,7 +21,7 @@ def run_nesterov(f, df, x0, s, r, epsilon=pow(10, -3)):
     f_x = f(x0)
     fs.append(f_x)
     N = 1
-    while N < 500:
+    while N < 3000:
         x_prev = x_curr
         x_curr = y_curr - s * df(y_curr)
         y_curr = x_curr + 1.0*(N-1)/(N+r-1)*(x_curr-x_prev)
