@@ -12,7 +12,6 @@ b = np.random.randn(N, 1) * 0.0003
 # x0 = np.random.randn(500, 1) * 2
 x0 = np.random.uniform(low=-0.5, high=0.5, size=b.shape)
 lamb = 4
-r = 3
 
 ATA = np.dot(A.T, A)
 eigs, _ = np.linalg.eig(ATA)
@@ -52,23 +51,28 @@ def f_star():
 
 if __name__ == "__main__":
     f_opt, x_opt = f_star()
-    # x0 = x_opt + np.random.randn(x_opt.shape[0], x_opt.shape[1]) * 0.0001
-    xs, fs = run_nesterov(f, df, x0, s, r, epsilon=pow(10, -3))
-
-    xs = np.array(xs)
     print(f_opt)
-    fs = np.array(fs) - f_opt
-    t = np.arange(len(xs))
 
-    k = 0
-    t = t[k:]
-    fs = fs[k:]
+    # x0 = x_opt + np.random.randn(x_opt.shape[0], x_opt.shape[1]) * 0.0001
+
+    rs = [3, 4, 5]
 
     plt.figure()
+
+    lines = []
     plt.yscale('log',basey=10) 
-    plt.plot(t, fs, linewidth=1)
-    plt.xlabel("iteration number")
+    for i in range(len(rs)):
+        r = rs[i]
+        _, fs = run_nesterov(f, df, x0, s, r, epsilon=pow(10, -3))
+        fs = np.array(fs) - f_opt
+        t = np.arange(len(fs))
+        line, = plt.plot(t, fs, linewidth=1, label="r = {}".format(r))
+        lines.append(line)
+
+    plt.legend(lines)
+    # plt.yscale('log',basey=10) 
+    plt.xlabel("iteration")
     plt.ylabel("f - f*")
-    plt.title("Nesterov's Lasso")
+    plt.title("Least square with l-1 regularization, N = {}".format(N))
     plt.savefig("plots/Lasso_N_{}.png".format(N))
     plt.show()
