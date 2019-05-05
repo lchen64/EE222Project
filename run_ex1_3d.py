@@ -37,6 +37,6 @@ if __name__ == "__main__":
     plt.plot(t, fs, linewidth=1)
     plt.xlabel("iteration")
     plt.ylabel("f - f*")
-    plt.title("'3D quadratic function")
+    plt.title("3D quadratic function")
     plt.savefig("plots/three_D_simple.png")
     plt.show()
