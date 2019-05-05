@@ -21,8 +21,8 @@ def df(x):
     return grad
 
 if __name__ == "__main__":
-
-    xs, fs = run_nesterov(f, df, x0, s, r, epsilon=pow(10, -3))
+    num_iter = 1000
+    xs, fs = run_nesterov(f, df, x0, s, r, num_iter=num_iter,epsilon=pow(10, -3))
 
     xs = np.array(xs)
     fs = np.array(fs)
@@ -35,7 +35,8 @@ if __name__ == "__main__":
     plt.figure()
     plt.yscale('log',basey=10) 
     plt.plot(t, fs, linewidth=1)
-    plt.xlabel("iteration number")
-    plt.ylabel("function value")
-    plt.title("Nesterov's quadratic function")
+    plt.xlabel("iteration")
+    plt.ylabel("f - f*")
+    plt.title("'3D quadratic function")
+    plt.savefig("plots/three_D_simple.png")
     plt.show()
