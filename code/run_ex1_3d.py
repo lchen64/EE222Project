@@ -21,7 +21,7 @@ def df(x):
     return grad
 
 if __name__ == "__main__":
-    num_iter = 1000
+    num_iter = 3000
     xs, fs = run_nesterov(f, df, x0, s, r, num_iter=num_iter,epsilon=pow(10, -3))
 
     xs = np.array(xs)
